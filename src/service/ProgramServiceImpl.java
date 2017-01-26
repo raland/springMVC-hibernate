@@ -1,13 +1,11 @@
 package service;
 
 import dao.ProgramDAO;
-import model.Channel;
 import model.Program;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by raul on 22/01/17.

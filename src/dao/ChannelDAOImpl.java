@@ -11,7 +11,7 @@ import java.util.List;
 public class ChannelDAOImpl implements ChannelDAO {
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory){
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -31,7 +31,7 @@ public class ChannelDAOImpl implements ChannelDAO {
     public List<Channel> listChannels() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Channel> channelList = session.createQuery("from Channel ").list();
-        for(Channel p : channelList){
+        for (Channel p : channelList) {
             // TODO: 22/01/17 something
         }
         return channelList;
@@ -48,7 +48,7 @@ public class ChannelDAOImpl implements ChannelDAO {
     public void removeChannel(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Channel c = session.load(Channel.class, id);
-        if(null != c){
+        if (null != c) {
             session.delete(c);
         }
     }

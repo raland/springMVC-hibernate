@@ -12,7 +12,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory){
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -32,7 +32,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     public List<Program> listPrograms() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Program> programList = session.createQuery("from Program ").list();
-        for(Program p : programList){
+        for (Program p : programList) {
             // TODO: 22/01/17 something
         }
         return programList;
@@ -48,7 +48,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     public void removeProgram(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Program p = session.load(Program.class, id);
-        if(p != null){
+        if (p != null) {
             session.delete(p);
         }
     }

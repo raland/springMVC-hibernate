@@ -22,13 +22,14 @@ import java.util.Map;
 @Controller
 public class ChannelController {
 
+    private ChannelService channelService;
+    private ProgramService programService;
+
     @Autowired()
     @Qualifier(value = "channelService")
     public void setChannelService(ChannelService channelService) {
         this.channelService = channelService;
     }
-
-    private ChannelService channelService;
 
     @Autowired()
     @Qualifier(value = "programService")
@@ -36,12 +37,10 @@ public class ChannelController {
         this.programService = programService;
     }
 
-    private ProgramService programService;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(Model model) {
         model.addAttribute("channel", new Channel());
-        Map<String,String> genre = new LinkedHashMap<>();
+        Map<String, String> genre = new LinkedHashMap<>();
         genre.put("genre1", "genre1");
         genre.put("genre2", "genre2");
         genre.put("genre3", "genre3");
@@ -74,7 +73,7 @@ public class ChannelController {
     @Transactional
     public String editChannel(@PathVariable("id") int id, Model model) {
         Channel channel = this.channelService.getChannelById(id);
-        Map<String,String> type = new LinkedHashMap<>();
+        Map<String, String> type = new LinkedHashMap<>();
         List<Program> programs = this.channelService.listChannelPrograms(id);
         programs.forEach(program -> program.convertDate());
         Hibernate.initialize(programs);
@@ -91,12 +90,52 @@ public class ChannelController {
 
     @RequestMapping(value = "/program/add", method = RequestMethod.POST)
     @Transactional
-    public String addProgram(@ModelAttribute("program")Program program, @ModelAttribute("channel") int id, Model model) {
+    public String addProgram(@ModelAttribute("program") Program program, @ModelAttribute("channel") int id, Model model) {
         Channel channel = this.channelService.getChannelById(id);
         channel.addProgram(program);
         channelService.updateChannel(channel);
         this.programService.addProgram(program);
         return "redirect:/channel/" + id;
+    }
+
+    @RequestMapping("/program/remove/{id}")
+    @Transactional
+    public String removeProgram(@PathVariable("id") int programId) {
+        Program program = this.programService.getProgramById(programId);
+        Channel channel = program.getChannel();
+        int channelId = channel.getChannelId();
+        channel.removeProgram(program);
+        this.programService.removeProgram(programId);
+        return "redirect:/channel/" + channelId;
+    }
+
+    @RequestMapping("/program/edit/{id}")
+    @Transactional
+    public String editProgram(@PathVariable("id") int programId, Model model) {
+        Program program = this.programService.getProgramById(programId);
+        Channel channel = program.getChannel();
+        model.addAttribute("listChannels", this.channelService.listChannels());
+        model.addAttribute("channel", channel);
+        model.addAttribute("program", program);
+        Map<String, String> type = new LinkedHashMap<>();
+        type.put("type1", "type1");
+        type.put("type2", "type2");
+        type.put("type3", "type3");
+        type.put("type4", "type4");
+        Map<String, Channel> availableChannels = new LinkedHashMap<>();
+        this.channelService.listChannels().forEach(channel1 -> availableChannels.put(channel1.getChannelName(), channel1));
+        model.addAttribute("channelList", availableChannels);
+        model.addAttribute("typeList", type);
+        return "editchannel";
+    }
+
+    @RequestMapping(value = "/program/update/{id}", method = RequestMethod.POST)
+    @Transactional
+    public String updateProgram(@PathVariable("id") int programId, Program program) {
+        Channel channel = program.getChannel();
+        this.programService.updateProgram(program);
+        return "redirect:/channel/" + channel.getChannelId(); // TODO: 1/26/17 move channel
+        // TODO: 1/26/17 change date default set default value
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.Date;
  * 155250
  */
 @Entity
-public class Program {
+public class    Program {
     @Id
     @GeneratedValue
     private int programId;
@@ -23,15 +23,6 @@ public class Program {
     private Date startTime;
     //in minutes
     private int programLength;
-
-    public Long getEpochTime() {
-        return epochTime;
-    }
-
-    public void setEpochTime(Long epochtime) {
-        this.epochTime = epochtime;
-    }
-
     private Long epochTime;
 
     public Program(String programName, int programLength) {
@@ -42,6 +33,14 @@ public class Program {
     public Program() {
     }
 
+    public Long getEpochTime() {
+        return epochTime;
+    }
+
+    public void setEpochTime(Long epochtime) {
+        this.epochTime = epochtime;
+    }
+
     public Channel getChannel() {
         return channel;
     }
@@ -50,7 +49,7 @@ public class Program {
         this.channel = channel;
     }
 
-    public void removeChannel(){
+    public void removeChannel() {
         channel = null;
     }
 

@@ -35,8 +35,10 @@
                             <td>${channel.channelName}</td>
                             <td>${channel.genre}</td>
                             <td>${channel.channelDescription}</td>
-                            <td><a class="btn btn-danger" href="<c:url value='/remove/${channel.channelId}' />" >Delete</a></td>
-                            <td><a class="btn btn-info" href="<c:url value='/channel/${channel.channelId}' />" >View</a></td>
+                            <td><a class="btn btn-danger"
+                                   href="<c:url value='/remove/${channel.channelId}' />">Delete</a></td>
+                            <td><a class="btn btn-info" href="<c:url value='/channel/${channel.channelId}' />">View</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
