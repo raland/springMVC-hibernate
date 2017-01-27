@@ -13,10 +13,11 @@
 <html>
 <head>
     <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
             integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
@@ -24,7 +25,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.cs   s">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+    <script type="text/javascript" src="<c:url value="/resources/js/programsearch.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/daterangepicker.js" />"></script>
 </head>
 <body>
 
@@ -35,14 +41,24 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
-            <h3><a href="${pageContext.request.contextPath}/channels">/channels</a></h3>
+        <div class="col-lg-6">
+            <a href="${pageContext.request.contextPath}/channels"><button class="btn-lg btn-primary">View Channels</button></a>
+            <div style="margin-top: 2%" class="form-group">
+                <select id="genreSelect" class="form-control">
+                    <c:forEach items="${genreList}" var="genre">
+                        <option value="${genre.key}">${genre.key}</option>
+                    </c:forEach>
+                </select>
+                <input id="dateInput" class="form-control" type="text" name="daterange">
+                <button id="searchButton" class="btn btn-info">Search</button>
+            </div>
+            <div id="searchResults">
+
+            </div>
         </div>
         <div class="col-sm-6">
-            <h3>Add Channel</h3>
-            <button class=" btn btn-primary" data-toggle="collapse" data-target="#demo">Collapsible</button>
-
-            <div id="demo" class="collapse">
+            <button class=" btn-lg btn-primary" data-toggle="collapse" data-target="#channelAdd">Add Channel</button>
+            <div id="channelAdd" class="collapse">
 
                 <c:url var="addAction" value="/channel/add"/>
 
@@ -65,10 +81,15 @@
                         <form:input cssClass="form-control" path="channelDescription"/>
                     </div>
 
-                    <input class="btn btn-default" type="submit"
+                    <input class="btn btn-success" type="submit"
                            value="<spring:message text="Add Channel"/>"/>
                 </form:form>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+
         </div>
     </div>
 </div>

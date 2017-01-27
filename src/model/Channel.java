@@ -19,6 +19,7 @@ public class Channel {
     private String channelName;
     private String channelDescription;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "channel")
+    @OrderBy("epochTime DESC")
     private List<Program> programs = new ArrayList<>();
 
     private String genre;

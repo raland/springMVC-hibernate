@@ -15,4 +15,6 @@ public interface ProgramDAO {
     public Program getProgramById(int id);
 
     public void removeProgram(int id);
+
+    public List<Program> searchByName(String name);
 }

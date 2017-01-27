@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository
@@ -51,5 +53,14 @@ public class ProgramDAOImpl implements ProgramDAO {
         if (p != null) {
             session.delete(p);
         }
+    }
+
+    @Override
+    public List<Program> searchByName(String name) {
+        Session session = this.sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Program> criteria = builder.createQuery(Program.class);
+        criteria.from(Program.class);
+        return null;
     }
 }

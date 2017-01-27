@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Edit Channel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
@@ -48,11 +49,11 @@
                         <form:options items="${typeList}"/>
                     </form:select>
                 </div>
-<%--                <div class="form-group">
-                    <form:select cssClass="form-control" path="channel">
-                        <form:options items="${channelList}"/>
-                    </form:select>
-                </div>--%>
+                <%--                <div class="form-group">
+                                    <form:select cssClass="form-control" path="channel">
+                                        <form:options items="${channelList}"/>
+                                    </form:select>
+                                </div>--%>
                 <div class="form-group">
                     <form:label class="control-label" path="programLength">
                         <spring:message text="Program duration"/>
@@ -67,23 +68,23 @@
                     <form:input cssClass="form-control" path="startTime" name="daterange"/>
                 </div>
 
-            <div class="form-group">
-                <select class="form-control" name="channels">
-                <c:forEach items="${listChannels}" var="channel">
-                    <option value="${channel.channelId}">${channel.channelName}</option>
-                </c:forEach>
-                </select>
-            </div>
+                <div class="form-group">
+                    <select class="form-control" name="channels">
+                        <c:forEach items="${listChannels}" var="channel">
+                            <option value="${channel.channelId}">${channel.channelName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
                 <form:hidden path="programId" value="${program.programId}"/>
 
                 <input type="hidden" name="previousId" value="${channel.channelId}">
 
-<%--
-                <form:hidden path="channel" value="${channel.channelId}"/>
---%>
+                <%--
+                                <form:hidden path="channel" value="${channel.channelId}"/>
+                --%>
 
-                <input class="btn btn-default" type="submit"
+                <input class="btn btn-success" type="submit"
                        value="<spring:message text="Save Program"/>"/>
             </form:form>
         </div>

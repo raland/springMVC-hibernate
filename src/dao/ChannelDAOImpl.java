@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChannelDAOImpl implements ChannelDAO {
@@ -57,5 +58,10 @@ public class ChannelDAOImpl implements ChannelDAO {
     @Transactional
     public List<Program> listChannelPrograms(int id) {
         return getChannelById(id).getPrograms();
+    }
+
+    @Override
+    public List<Program> listProgramsByDay(int id, int day) {
+        return new ArrayList<Program>(getChannelById(id).filterByDay(day));
     }
 }

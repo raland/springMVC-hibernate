@@ -16,4 +16,6 @@ public interface ProgramService {
 
     public void removeProgram(int id);
 
+    public List<Program> searchByName(String name);
+
 }

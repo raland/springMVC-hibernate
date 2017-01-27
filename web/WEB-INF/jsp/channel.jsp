@@ -6,7 +6,7 @@
 <head>
     <title>Channel</title>
 
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
@@ -71,43 +71,224 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane active" id="mon" role="tabpanel">...</div>
-                <div class="tab-pane" id="tue" role="tabpanel">...</div>
-                <div class="tab-pane" id="wed" role="tabpanel">...</div>
-                <div class="tab-pane" id="thu" role="tabpanel">...</div>
-                <div class="tab-pane" id="fri" role="tabpanel">...</div>
-                <div class="tab-pane" id="sat" role="tabpanel">...</div>
-                <div class="tab-pane" id="sun" role="tabpanel">...</div>
+                <div class="tab-pane active" id="mon" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${mondayList}" var="tuesdayProgram">
+                                <tr>
+                                    <td>${tuesdayProgram.programName}</td>
+                                    <td>${tuesdayProgram.programType}</td>
+                                    <td>${tuesdayProgram.programLength}</td>
+                                    <td>${tuesdayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${tuesdayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${tuesdayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tue" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${tuesdayList}" var="tuesdayProgram">
+                                <tr>
+                                    <td>${tuesdayProgram.programName}</td>
+                                    <td>${tuesdayProgram.programType}</td>
+                                    <td>${tuesdayProgram.programLength}</td>
+                                    <td>${tuesdayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${tuesdayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${tuesdayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="wed" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${wednesdayList}" var="wednesdayProgram">
+                                <tr>
+                                    <td>${wednesdayProgram.programName}</td>
+                                    <td>${wednesdayProgram.programType}</td>
+                                    <td>${wednesdayProgram.programLength}</td>
+                                    <td>${wednesdayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${wednesdayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${wednesdayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="thu" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${thursdayList}" var="thursdayProgram">
+                                <tr>
+                                    <td>${thursdayProgram.programName}</td>
+                                    <td>${thursdayProgram.programType}</td>
+                                    <td>${thursdayProgram.programLength}</td>
+                                    <td>${thursdayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${thursdayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${thursdayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="fri" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${fridayList}" var="fridayProgram">
+                                <tr>
+                                    <td>${fridayProgram.programName}</td>
+                                    <td>${fridayProgram.programType}</td>
+                                    <td>${fridayProgram.programLength}</td>
+                                    <td>${fridayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${fridayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${fridayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="sat" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${saturdayList}" var="saturdayProgram">
+                                <tr>
+                                    <td>${saturdayProgram.programName}</td>
+                                    <td>${saturdayProgram.programType}</td>
+                                    <td>${saturdayProgram.programLength}</td>
+                                    <td>${saturdayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${saturdayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${saturdayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="sun" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Program Name</th>
+                                <th>type</th>
+                                <th>duration</th>
+                                <th>Start time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${sundayList}" var="sundayProgram">
+                                <tr>
+                                    <td>${sundayProgram.programName}</td>
+                                    <td>${sundayProgram.programType}</td>
+                                    <td>${sundayProgram.programLength}</td>
+                                    <td>${sundayProgram.startTime}</td>
+                                    <td><a class="btn btn-danger"
+                                           href="<c:url value='/program/remove/${sundayProgram.programId}' />">Remove
+                                        Program</a></td>
+                                    <td><a class="btn btn-info"
+                                           href="<c:url value='/program/edit/${sundayProgram.programId}' />">View/Edit
+                                        Program</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-<%--            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Program Name</th>
-                        <th>type</th>
-                        <th>duration</th>
-                        <th>Start time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${programList}" var="program1">
-                        <tr>
-                            <td>${program1.programName}</td>
-                            <td>${program1.programType}</td>
-                            <td>${program1.programLength}</td>
-                            <td>${program1.startTime}</td>
-                            <td><a class="btn btn-danger"
-                                   href="<c:url value='/program/remove/${program1.programId}' />">Remove Program</a></td>
-                            <td><a class="btn btn-info" href="<c:url value='/program/edit/${program1.programId}' />">View/Edit Program</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>--%>
-
-
         </div>
         <div class="col-sm-6">
             <c:url var="addProgram" value="/program/add"/>

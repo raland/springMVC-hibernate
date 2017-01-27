@@ -3,6 +3,7 @@ package model;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * 155250
  */
 @Entity
-public class    Program {
+public class Program implements Comparator<Program>, Comparable<Program> {
     @Id
     @GeneratedValue
     private int programId;
@@ -105,11 +106,20 @@ public class    Program {
         }
     }
 
-    public void moveProgram(Channel previousChannel, Channel newChannel){
+    public void moveProgram(Channel previousChannel, Channel newChannel) {
         if (!previousChannel.equals(newChannel)) {
-         previousChannel.removeProgram(this);
-         newChannel.addProgram(this);
+            previousChannel.removeProgram(this);
+            newChannel.addProgram(this);
         }
     }
 
+    @Override
+    public int compare(Program p1, Program p2) {
+        return (int) (p1.getEpochTime() - p2.getEpochTime());
+    }
+
+    @Override
+    public int compareTo(Program program) {
+        return this.startTime.compareTo(program.getStartTime());
+    }
 }

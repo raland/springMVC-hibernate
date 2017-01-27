@@ -52,4 +52,10 @@ public class ChannelServiceImpl implements ChannelService {
     public List<Program> listChannelPrograms(int id) {
         return channelDAO.listChannelPrograms(id);
     }
+
+    @Override
+    @Transactional
+    public List<Program> listProgramsByDay(int id, int day) {
+        return channelDAO.listProgramsByDay(id, day);
+    }
 }

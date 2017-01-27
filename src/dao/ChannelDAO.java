@@ -20,4 +20,6 @@ public interface ChannelDAO {
     public void removeChannel(int id);
 
     List<Program> listChannelPrograms(int id);
+
+    List<Program> listProgramsByDay(int id, int day);
 }

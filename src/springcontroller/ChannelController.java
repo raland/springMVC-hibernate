@@ -3,6 +3,8 @@ package springcontroller;
 import model.Channel;
 import model.Program;
 import org.hibernate.Hibernate;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import service.ChannelService;
 import service.ProgramService;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ChannelController {
@@ -71,8 +71,12 @@ public class ChannelController {
     public String editChannel(@PathVariable("id") int id, Model model) {
         Channel channel = this.channelService.getChannelById(id);
         Map<String, String> type = new LinkedHashMap<>();
-        List<Program> programs = this.channelService.listChannelPrograms(id);
-        programs.forEach(program -> program.convertDate());
+        List<List<Program>> programs = new ArrayList<>();
+        for (int i = 1; i < 8; i++) {
+            programs.add(channelService.listProgramsByDay(id, i));
+            programs.get(programs.size() - 1).forEach(program -> program.convertDate());
+            Collections.sort(programs.get(programs.size() - 1));
+        }
         Hibernate.initialize(programs);
         type.put("type1", "type1");
         type.put("type2", "type2");
@@ -81,7 +85,13 @@ public class ChannelController {
         model.addAttribute("typeList", type);
         model.addAttribute("channel", channel);
         model.addAttribute("program", new Program());
-        model.addAttribute("programList", programs);
+        model.addAttribute("sundayList", programs.get(0));
+        model.addAttribute("mondayList", programs.get(1));
+        model.addAttribute("tuesdayList", programs.get(2));
+        model.addAttribute("wednesdayList", programs.get(3));
+        model.addAttribute("thursdayList", programs.get(4));
+        model.addAttribute("fridayList", programs.get(5));
+        model.addAttribute("saturdayList", programs.get(6));
         return "channel";
     }
 
@@ -128,16 +138,36 @@ public class ChannelController {
 
     @RequestMapping(value = "/program/update/{id}", method = RequestMethod.POST)
     @Transactional
-    public String updateProgram(@PathVariable("id") int programId, @ModelAttribute("program") Program program, @RequestParam(value="previousId")int previousChannelId, @RequestParam(value = "channels") int newId) {
+    public String updateProgram(@PathVariable("id") int programId, @ModelAttribute("program") Program program, @RequestParam(value = "previousId") int previousChannelId, @RequestParam(value = "channels") int newId) {
         System.out.println("previous id " + previousChannelId);
         System.out.println("new id " + newId);
-        if (previousChannelId != newId) {
-            Channel newChannel = channelService.getChannelById(newId);
-            program.setChannel(newChannel);
-        }
+        Channel newChannel = channelService.getChannelById(newId);
+        program.setChannel(newChannel);
         this.programService.updateProgram(program);
-        return "redirect:/channel/" + previousChannelId; // TODO: 1/26/17 move channel
-//        // TODO: 1/26/17 change date default set default value
+        return "redirect:/channel/" + previousChannelId;
+    }
+
+    @RequestMapping(value = "/programs/search", method = RequestMethod.POST)
+    @ResponseBody
+    public String searchPrograms(@RequestParam String query) {
+        System.err.println("activating");
+        List<Program> results = programService.searchByName(query); //programService.listPrograms().stream().filter(program -> program.getProgramName().toLowerCase().equals(query.toLowerCase())).collect(Collectors.toList());
+        System.out.println(results.size());
+        //Collections.sort(results);
+        JSONArray jsonArray = new JSONArray();
+        for (Program program : results) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("programName", program.getProgramName());
+            jsonObject.put("channelName", program.getChannel().getChannelName());
+            jsonObject.put("startTime", program.getStartTime().toString());
+            jsonObject.put("channelId", program.getChannel().getChannelId());
+            jsonArray.add(jsonObject);
+        }
+
+
+        JSONObject mainObj = new JSONObject();
+        mainObj.put("results", jsonArray);
+        return mainObj.toJSONString();
     }
 
 }

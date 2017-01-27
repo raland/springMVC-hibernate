@@ -48,4 +48,10 @@ public class ProgramServiceImpl implements ProgramService {
     public void removeProgram(int id) {
         programDAO.removeProgram(id);
     }
+
+    @Override
+    @Transactional
+    public List<Program> searchByName(String name) {
+        return programDAO.searchByName(name);
+    }
 }
