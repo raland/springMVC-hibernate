@@ -44,7 +44,43 @@
     <div class="row">
         <div class="col-sm-6">
 
-            <div class="table-responsive">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#mon" role="tab">Monday</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tue" role="tab">Tuesday</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#wed" role="tab">Wednesday</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#thu" role="tab">Thursday</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#fri" role="tab">Friday</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#sat" role="tab">Saturday</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#sun" role="tab">Sunday</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="mon" role="tabpanel">...</div>
+                <div class="tab-pane" id="tue" role="tabpanel">...</div>
+                <div class="tab-pane" id="wed" role="tabpanel">...</div>
+                <div class="tab-pane" id="thu" role="tabpanel">...</div>
+                <div class="tab-pane" id="fri" role="tabpanel">...</div>
+                <div class="tab-pane" id="sat" role="tabpanel">...</div>
+                <div class="tab-pane" id="sun" role="tabpanel">...</div>
+            </div>
+
+<%--            <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -69,7 +105,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-            </div>
+            </div>--%>
 
 
         </div>

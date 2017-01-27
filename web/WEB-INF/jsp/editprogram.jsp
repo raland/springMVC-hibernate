@@ -48,11 +48,11 @@
                         <form:options items="${typeList}"/>
                     </form:select>
                 </div>
-                <div class="form-group">
+<%--                <div class="form-group">
                     <form:select cssClass="form-control" path="channel">
                         <form:options items="${channelList}"/>
                     </form:select>
-                </div>
+                </div>--%>
                 <div class="form-group">
                     <form:label class="control-label" path="programLength">
                         <spring:message text="Program duration"/>
@@ -66,6 +66,14 @@
                     </form:label>
                     <form:input cssClass="form-control" path="startTime" name="daterange"/>
                 </div>
+
+            <div class="form-group">
+                <select class="form-control" name="channels">
+                <c:forEach items="${listChannels}" var="channel">
+                    <option value="${channel.channelId}">${channel.channelName}</option>
+                </c:forEach>
+                </select>
+            </div>
 
                 <form:hidden path="programId" value="${program.programId}"/>
 

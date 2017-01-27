@@ -128,13 +128,14 @@ public class ChannelController {
 
     @RequestMapping(value = "/program/update/{id}", method = RequestMethod.POST)
     @Transactional
-    public String updateProgram(@PathVariable("id") int programId, @ModelAttribute("program") Program program, @RequestParam(value="previousId") String previousChannelId) {
-        System.err.println(program.getChannel().getChannelId());
-        System.err.println("213");
-        /*Channel newChannel = program.getChannel();
-        Channel previousChannel = channelService.getChannelById(Integer.parseInt(previousChannelId));
-        program.moveProgram(previousChannel, newChannel);*/
-        //this.programService.updateProgram(program);
+    public String updateProgram(@PathVariable("id") int programId, @ModelAttribute("program") Program program, @RequestParam(value="previousId")int previousChannelId, @RequestParam(value = "channels") int newId) {
+        System.out.println("previous id " + previousChannelId);
+        System.out.println("new id " + newId);
+        if (previousChannelId != newId) {
+            Channel newChannel = channelService.getChannelById(newId);
+            program.setChannel(newChannel);
+        }
+        this.programService.updateProgram(program);
         return "redirect:/channel/" + previousChannelId; // TODO: 1/26/17 move channel
 //        // TODO: 1/26/17 change date default set default value
     }
