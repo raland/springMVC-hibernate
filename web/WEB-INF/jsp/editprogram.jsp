@@ -69,6 +69,8 @@
 
                 <form:hidden path="programId" value="${program.programId}"/>
 
+                <input type="hidden" name="previousId" value="${channel.channelId}">
+
 <%--
                 <form:hidden path="channel" value="${channel.channelId}"/>
 --%>

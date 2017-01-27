@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import service.ChannelService;
 import service.ProgramService;
 
@@ -122,20 +119,24 @@ public class ChannelController {
         type.put("type2", "type2");
         type.put("type3", "type3");
         type.put("type4", "type4");
-        Map<String, Channel> availableChannels = new LinkedHashMap<>();
-        this.channelService.listChannels().forEach(channel1 -> availableChannels.put(channel1.getChannelName(), channel1));
+        Map<Channel, String> availableChannels = new LinkedHashMap<>();
+        this.channelService.listChannels().forEach(channel1 -> availableChannels.put(channel1, channel1.getChannelName()));
         model.addAttribute("channelList", availableChannels);
         model.addAttribute("typeList", type);
-        return "editchannel";
+        return "editprogram";
     }
 
     @RequestMapping(value = "/program/update/{id}", method = RequestMethod.POST)
     @Transactional
-    public String updateProgram(@PathVariable("id") int programId, Program program) {
-        Channel channel = program.getChannel();
-        this.programService.updateProgram(program);
-        return "redirect:/channel/" + channel.getChannelId(); // TODO: 1/26/17 move channel
-        // TODO: 1/26/17 change date default set default value
+    public String updateProgram(@PathVariable("id") int programId, @ModelAttribute("program") Program program, @RequestParam(value="previousId") String previousChannelId) {
+        System.err.println(program.getChannel().getChannelId());
+        System.err.println("213");
+        /*Channel newChannel = program.getChannel();
+        Channel previousChannel = channelService.getChannelById(Integer.parseInt(previousChannelId));
+        program.moveProgram(previousChannel, newChannel);*/
+        //this.programService.updateProgram(program);
+        return "redirect:/channel/" + previousChannelId; // TODO: 1/26/17 move channel
+//        // TODO: 1/26/17 change date default set default value
     }
 
 }

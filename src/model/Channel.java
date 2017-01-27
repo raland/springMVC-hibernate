@@ -18,7 +18,7 @@ public class Channel {
     private int channelId;
     private String channelName;
     private String channelDescription;
-    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "channel")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "channel")
     private List<Program> programs = new ArrayList<>();
 
     private String genre;
@@ -86,5 +86,16 @@ public class Channel {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "channelId=" + channelId +
+                ", channelName='" + channelName + '\'' +
+                ", channelDescription='" + channelDescription + '\'' +
+                ", programs=" + programs +
+                ", genre='" + genre + '\'' +
+                '}';
     }
 }

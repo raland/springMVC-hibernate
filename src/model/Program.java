@@ -16,7 +16,7 @@ public class    Program {
     private int programId;
     private String programName;
     private String programType;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Channel channel;
     @Column(columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -102,6 +102,13 @@ public class    Program {
     public void convertDate() {
         if (epochTime != null) {
             startTime = new Date(epochTime);
+        }
+    }
+
+    public void moveProgram(Channel previousChannel, Channel newChannel){
+        if (!previousChannel.equals(newChannel)) {
+         previousChannel.removeProgram(this);
+         newChannel.addProgram(this);
         }
     }
 
