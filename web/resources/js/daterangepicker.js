@@ -70,6 +70,27 @@ $(document).ready(function () {
         endDate = end;
     });
 
+    function createSearchResult(json) {
+        var $table = $("<table>", {"class": "table"});
+        var jsonData = JSON.parse(json);
+        for (var i = 0; i < jsonData.length; i++) {
+            var $row = $("<tr>");
+            var counter = jsonData[i];
+            alert(counter.programName);
+            var $cell1 = $("<td>");
+            var $cell2 = $("<td>");
+            var $cell3 = $("<td>");
+            $cell1.append(counter.programName);
+            $cell2.append(counter.channelName);
+            $cell3.append(counter.startTime);
+            $row.append($cell1);
+            $row.append($cell2);
+            $row.append($cell3);
+            $table.append($row);
+        }
+        $('#searchResults').append($table);
+    }
+
     $("#searchButton").click(function(e){
         $.ajax({
             type: "POST",
@@ -81,9 +102,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 $('#searchResults').html("");
-/*                $.each(JSON.parse(data), function (i, val) {
-                    $('#searchResults').prepend(createSearchResult2(i, val));
-                });*/
+                createSearchResult(data);
             }
         })
     });

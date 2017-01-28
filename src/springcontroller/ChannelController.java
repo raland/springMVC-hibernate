@@ -15,7 +15,6 @@ import service.ChannelService;
 import service.ProgramService;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 public class ChannelController {
@@ -161,8 +160,8 @@ public class ChannelController {
         System.out.println(type + " " + startdate + " - " + enddate);
         List<Program> results = programService.searchByType(type, startdate, enddate);
         System.out.println(results.size());
-        //Collections.sort(results);
-        /*JSONArray jsonArray = new JSONArray();
+        Collections.sort(results);
+        JSONArray jsonArray = new JSONArray();
         for (Program program : results) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("programName", program.getProgramName());
@@ -175,8 +174,7 @@ public class ChannelController {
 
         JSONObject mainObj = new JSONObject();
         mainObj.put("results", jsonArray);
-        return mainObj.toJSONString();*/
-return "hello";
+        return jsonArray.toJSONString();
     }
 
 }
