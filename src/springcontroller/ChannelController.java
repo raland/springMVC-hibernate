@@ -139,6 +139,7 @@ public class ChannelController {
         this.channelService.listChannels().forEach(channel1 -> availableChannels.put(channel1, channel1.getChannelName()));
         model.addAttribute("channelList", availableChannels);
         model.addAttribute("typeList", type);
+        model.addAttribute("repeatingPrograms", programService.searchByName(program.getProgramName()));
         return "editprogram";
     }
 
@@ -156,10 +157,7 @@ public class ChannelController {
     @RequestMapping(value = "/programs/search/bytype", method = RequestMethod.POST)
     @ResponseBody
     public String searchPrograms(@RequestParam String type, @RequestParam long startdate, @RequestParam long enddate) {
-        System.err.println("activating");
-        System.out.println(type + " " + startdate + " - " + enddate);
         List<Program> results = programService.searchByType(type, startdate, enddate);
-        System.out.println(results.size());
         Collections.sort(results);
         JSONArray jsonArray = new JSONArray();
         for (Program program : results) {
@@ -170,8 +168,6 @@ public class ChannelController {
             jsonObject.put("channelId", program.getChannel().getChannelId());
             jsonArray.add(jsonObject);
         }
-
-
         JSONObject mainObj = new JSONObject();
         mainObj.put("results", jsonArray);
         return jsonArray.toJSONString();

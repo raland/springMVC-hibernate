@@ -5,8 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,11 +57,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     @Override
     public List<Program> searchByName(String name) {
-        Session session = this.sessionFactory.getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Program> criteria = builder.createQuery(Program.class);
-        criteria.from(Program.class);
-        return null;
+        return this.listPrograms().stream().filter(program -> program.getProgramName().equals(name)).collect(Collectors.toList());
     }
 
     @Override

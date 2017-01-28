@@ -58,6 +58,6 @@ public class ProgramServiceImpl implements ProgramService {
     @Override
     @Transactional
     public List<Program> searchByType(String type, long startDate, long endDate) {
-        return programDAO.searchByType(type,startDate,endDate);
+        return programDAO.searchByType(type, startDate, endDate);
     }
 }

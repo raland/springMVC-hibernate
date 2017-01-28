@@ -1,6 +1,3 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: raul
@@ -8,11 +5,12 @@
   Time: 17:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ include file="include.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="include.jsp" %>
 <html>
 <head>
     <title>Home</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -28,36 +26,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
-    <script type="text/javascript" src="<c:url value="/resources/js/programsearch.js" />"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>"/>
     <script type="text/javascript" src="<c:url value="/resources/js/daterangepicker.js" />"></script>
 </head>
 <body>
 
 <div class="jumbotron text-center">
-    <h1>TV Kava</h1>
-    <%--<p>Greetings, it is now <c:out value="${now}"/></p>--%>
+    <h1>TV Guide</h1>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-6">
-            <a href="${pageContext.request.contextPath}/channels"><button class="btn-lg btn-primary">View Channels</button></a>
+            <a href="${pageContext.request.contextPath}/channels">
+                <button class="btn-lg btn-primary btn-block">View Channels</button>
+            </a>
             <div style="margin-top: 2%" class="form-group">
+                <label style="margin-top: 2%" for="genreSelect">Program type</label>
                 <select id="genreSelect" class="form-control">
                     <c:forEach items="${typeList}" var="genre">
                         <option value="${genre.key}">${genre.key}</option>
                     </c:forEach>
                 </select>
+                <label style="margin-top: 2%" for="dateInput">Airing time</label>
                 <input id="dateInput" class="form-control" type="text" name="daterange">
-                <button id="searchButton" class="btn btn-info">Search</button>
+                <button style="margin-top: 2%" id="searchButton" class="btn btn-info btn-block">Search</button>
             </div>
             <div id="searchResults">
 
             </div>
         </div>
         <div class="col-sm-6">
-            <button class=" btn-lg btn-primary" data-toggle="collapse" data-target="#channelAdd">Add Channel</button>
+            <button class=" btn-lg btn-primary btn-block" data-toggle="collapse" data-target="#channelAdd">Add Channel</button>
             <div id="channelAdd" class="collapse">
 
                 <c:url var="addAction" value="/channel/add"/>
@@ -85,11 +85,6 @@
                            value="<spring:message text="Add Channel"/>"/>
                 </form:form>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-
         </div>
     </div>
 </div>

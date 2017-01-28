@@ -1,8 +1,9 @@
-<%@ include file="include.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="include.jsp" %>
 <html>
 <head>
     <title>Channels</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -18,15 +19,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
+    <div class="jumbotron text-center">
+        <h1>Browse Channels</h1>
+    </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-lg-12">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>Channel Name</th>
-                        <th>genre</th>
+                        <th>Genre</th>
                         <th>Description</th>
                     </tr>
                     </thead>

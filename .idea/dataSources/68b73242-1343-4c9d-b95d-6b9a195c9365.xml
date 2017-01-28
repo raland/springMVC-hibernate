@@ -9,8 +9,8 @@
     </database>
     <schema id="3" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2017-01-28.13:58:37.175</IntrospectionTimestamp>
-      <IntrospectionStateNumber>2482</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2017-01-28.20:48:22.840</IntrospectionTimestamp>
+      <IntrospectionStateNumber>2540</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -35,134 +35,95 @@
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <table id="10" parent="3" name="channel">
-      <ObjectId>17630</ObjectId>
-      <StateNumber>2447</StateNumber>
+      <ObjectId>25565</ObjectId>
+      <StateNumber>2540</StateNumber>
     </table>
-    <table id="11" parent="3" name="channel_program">
-      <ObjectId>16664</ObjectId>
-      <StateNumber>2037</StateNumber>
+    <table id="11" parent="3" name="program">
+      <ObjectId>25573</ObjectId>
+      <StateNumber>2540</StateNumber>
     </table>
-    <table id="12" parent="3" name="program">
-      <ObjectId>17638</ObjectId>
-      <StateNumber>2482</StateNumber>
-    </table>
-    <column id="13" parent="10" name="channelid">
+    <column id="12" parent="10" name="channelid">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2437</StateNumber>
+      <StateNumber>2538</StateNumber>
     </column>
-    <column id="14" parent="10" name="channeldescription">
+    <column id="13" parent="10" name="channeldescription">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
-      <StateNumber>2437</StateNumber>
+      <StateNumber>2538</StateNumber>
     </column>
-    <column id="15" parent="10" name="channelname">
+    <column id="14" parent="10" name="channelname">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
-      <StateNumber>2437</StateNumber>
+      <StateNumber>2538</StateNumber>
     </column>
-    <column id="16" parent="10" name="genre">
+    <column id="15" parent="10" name="genre">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
-      <StateNumber>2447</StateNumber>
+      <StateNumber>2538</StateNumber>
     </column>
-    <index id="17" parent="10" name="channel_pkey">
-      <ObjectId>17636</ObjectId>
+    <index id="16" parent="10" name="channel_pkey">
+      <ObjectId>25571</ObjectId>
       <ColNames>channelid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="18" parent="10" name="channel_pkey">
-      <ObjectId>17637</ObjectId>
+    <key id="17" parent="10" name="channel_pkey">
+      <ObjectId>25572</ObjectId>
       <ColNames>channelid</ColNames>
       <UnderlyingIndexName>channel_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="19" parent="11" name="channel_channelid">
+    <column id="18" parent="11" name="programid">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2035</StateNumber>
+      <StateNumber>2539</StateNumber>
     </column>
-    <column id="20" parent="11" name="programs_programid">
+    <column id="19" parent="11" name="epochtime">
       <Position>2</Position>
-      <DataType>integer|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>2035</StateNumber>
+      <DataType>bigint|0</DataType>
+      <StateNumber>2539</StateNumber>
     </column>
-    <index id="21" parent="11" name="channel_program_pkey">
-      <ObjectId>16667</ObjectId>
-      <ColNames>channel_channelid
-programs_programid</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="22" parent="11" name="uk_jcqo2of7re7814w0klp41tmar">
-      <ObjectId>16669</ObjectId>
-      <ColNames>programs_programid</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="23" parent="11" name="channel_program_pkey">
-      <ObjectId>16668</ObjectId>
-      <ColNames>channel_channelid
-programs_programid</ColNames>
-      <UnderlyingIndexName>channel_program_pkey</UnderlyingIndexName>
-      <Primary>1</Primary>
-    </key>
-    <key id="24" parent="11" name="uk_jcqo2of7re7814w0klp41tmar">
-      <ObjectId>16670</ObjectId>
-      <ColNames>programs_programid</ColNames>
-      <UnderlyingIndexName>uk_jcqo2of7re7814w0klp41tmar</UnderlyingIndexName>
-    </key>
-    <column id="25" parent="12" name="programid">
-      <Position>1</Position>
-      <DataType>integer|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>2438</StateNumber>
-    </column>
-    <column id="26" parent="12" name="programlength">
-      <Position>2</Position>
-      <DataType>integer|0</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>2438</StateNumber>
-    </column>
-    <column id="27" parent="12" name="programname">
+    <column id="20" parent="11" name="programlength">
       <Position>3</Position>
-      <DataType>varchar(255)|0</DataType>
-      <StateNumber>2438</StateNumber>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2539</StateNumber>
     </column>
-    <column id="28" parent="12" name="programtype">
+    <column id="21" parent="11" name="programname">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
-      <StateNumber>2438</StateNumber>
+      <StateNumber>2539</StateNumber>
     </column>
-    <column id="29" parent="12" name="starttime">
+    <column id="22" parent="11" name="programtype">
       <Position>5</Position>
-      <DataType>timestamp|0</DataType>
-      <StateNumber>2438</StateNumber>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>2539</StateNumber>
     </column>
-    <column id="30" parent="12" name="channel_channelid">
+    <column id="23" parent="11" name="starttime">
       <Position>6</Position>
-      <DataType>integer|0</DataType>
-      <StateNumber>2438</StateNumber>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>2539</StateNumber>
     </column>
-    <column id="31" parent="12" name="epochtime">
+    <column id="24" parent="11" name="channel_channelid">
       <Position>7</Position>
-      <DataType>bigint|0</DataType>
-      <StateNumber>2482</StateNumber>
+      <DataType>integer|0</DataType>
+      <StateNumber>2539</StateNumber>
     </column>
-    <index id="32" parent="12" name="program_pkey">
-      <ObjectId>17644</ObjectId>
+    <index id="25" parent="11" name="program_pkey">
+      <ObjectId>25579</ObjectId>
       <ColNames>programid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="33" parent="12" name="program_pkey">
-      <ObjectId>17645</ObjectId>
+    <key id="26" parent="11" name="program_pkey">
+      <ObjectId>25580</ObjectId>
       <ColNames>programid</ColNames>
       <UnderlyingIndexName>program_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="34" parent="12" name="fkppbp9cng0h9cwp14quxss4a6v">
-      <ObjectId>17646</ObjectId>
+    <foreign-key id="27" parent="11" name="fkppbp9cng0h9cwp14quxss4a6v">
+      <ObjectId>25581</ObjectId>
       <ColNames>channel_channelid</ColNames>
       <RefTableName>channel</RefTableName>
       <RefKeyName>channel_pkey</RefKeyName>

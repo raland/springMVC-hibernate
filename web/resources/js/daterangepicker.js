@@ -65,7 +65,7 @@ $(document).ready(function () {
         },
         "startDate": "01/21/2017",
         "endDate": "01/27/2017"
-    }, function(start, end, label) {
+    }, function (start, end, label) {
         startDate = start;
         endDate = end;
     });
@@ -91,7 +91,7 @@ $(document).ready(function () {
         $('#searchResults').append($table);
     }
 
-    $("#searchButton").click(function(e){
+    $("#searchButton").click(function (e) {
         $.ajax({
             type: "POST",
             url: "/programs/search/bytype",

@@ -1,11 +1,9 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ include file="include.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="include.jsp" %>
 <html>
 <head>
     <title>Channel</title>
-
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -21,7 +19,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>"/>
     <script type="text/javascript" src="<c:url value="/resources/js/daterangepicker.js" />"></script>
 </head>
 <body>
@@ -83,17 +81,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${mondayList}" var="tuesdayProgram">
+                            <c:forEach items="${mondayList}" var="repeatingProgram">
                                 <tr>
-                                    <td>${tuesdayProgram.programName}</td>
-                                    <td>${tuesdayProgram.programType}</td>
-                                    <td>${tuesdayProgram.programLength}</td>
-                                    <td>${tuesdayProgram.startTime}</td>
+                                    <td>${repeatingProgram.programName}</td>
+                                    <td>${repeatingProgram.programType}</td>
+                                    <td>${repeatingProgram.programLength}</td>
+                                    <td>${repeatingProgram.startTime}</td>
                                     <td><a class="btn btn-danger"
-                                           href="<c:url value='/program/remove/${tuesdayProgram.programId}' />">Remove
+                                           href="<c:url value='/program/remove/${repeatingProgram.programId}' />">Remove
                                         Program</a></td>
                                     <td><a class="btn btn-info"
-                                           href="<c:url value='/program/edit/${tuesdayProgram.programId}' />">View/Edit
+                                           href="<c:url value='/program/edit/${repeatingProgram.programId}' />">View/Edit
                                         Program</a>
                                     </td>
                                 </tr>
@@ -114,17 +112,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${tuesdayList}" var="tuesdayProgram">
+                            <c:forEach items="${tuesdayList}" var="repeatingProgram">
                                 <tr>
-                                    <td>${tuesdayProgram.programName}</td>
-                                    <td>${tuesdayProgram.programType}</td>
-                                    <td>${tuesdayProgram.programLength}</td>
-                                    <td>${tuesdayProgram.startTime}</td>
+                                    <td>${repeatingProgram.programName}</td>
+                                    <td>${repeatingProgram.programType}</td>
+                                    <td>${repeatingProgram.programLength}</td>
+                                    <td>${repeatingProgram.startTime}</td>
                                     <td><a class="btn btn-danger"
-                                           href="<c:url value='/program/remove/${tuesdayProgram.programId}' />">Remove
+                                           href="<c:url value='/program/remove/${repeatingProgram.programId}' />">Remove
                                         Program</a></td>
                                     <td><a class="btn btn-info"
-                                           href="<c:url value='/program/edit/${tuesdayProgram.programId}' />">View/Edit
+                                           href="<c:url value='/program/edit/${repeatingProgram.programId}' />">View/Edit
                                         Program</a>
                                     </td>
                                 </tr>
@@ -309,7 +307,7 @@
                     <form:label class="control-label" path="programLength">
                         <spring:message text="Program duration"/>
                     </form:label>
-                    <form:input cssClass="form-control" path="programLength"/>
+                    <form:input value="1" type="number" min="1" cssClass="form-control" path="programLength"/>
                 </div>
 
                 <div class="form-group">
@@ -318,16 +316,12 @@
                     </form:label>
                     <form:input cssClass="form-control" path="startTime" name="daterange"/>
                 </div>
-
-
                 <form:hidden path="channel" value="${channel.channelId}"/>
-
-                <input class="btn btn-default" type="submit"
+                <input class="btn btn-default btn-success" type="submit"
                        value="<spring:message text="Add Program"/>"/>
             </form:form>
         </div>
     </div>
 </div>
-
 </body>
 </html>
