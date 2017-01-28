@@ -32,9 +32,10 @@
 </head>
 <body>
 
-<div class="jumbotron text-center">
+<div style="background-image: url('<c:url value="/resources/img/jumbobg-min.png"/>');" class="jumbotron text-center">
     <h1>TV Guide</h1>
 </div>
+<img src="<c:url value="/resources/img/jumbobg-min.png"/>">
 
 <div class="container-fluid">
     <div class="row">
