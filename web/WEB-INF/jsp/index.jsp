@@ -27,15 +27,14 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css"
-          href="<c:url value="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>"/>
+          href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
     <script type="text/javascript" src="<c:url value="/resources/js/daterangepicker.js" />"></script>
 </head>
 <body>
 
-<div style="background-image: url('<c:url value="/resources/img/jumbobg-min.png"/>');" class="jumbotron text-center">
+<div class="jumbotron text-center">
     <h1>TV Guide</h1>
 </div>
-<img src="<c:url value="/resources/img/jumbobg-min.png"/>">
 
 <div class="container-fluid">
     <div class="row">
