@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import service.ChannelService;
 import service.ProgramService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ChannelController {
@@ -36,30 +39,21 @@ public class ChannelController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(Model model) {
+        Map<String, String> genres = channelService.listChannelGenres();
+        Map<String, String> types = programService.listProgramTypes();
         model.addAttribute("channel", new Channel());
-        Map<String, String> genre = new LinkedHashMap<>();
-        Map<String, String> type = new LinkedHashMap<>();
-        genre.put("genre1", "genre1");
-        genre.put("genre2", "genre2");
-        genre.put("genre3", "genre3");
-        genre.put("genre4", "genre4");
-        type.put("type1", "type1");
-        type.put("type2", "type2");
-        type.put("type3", "type3");
-        type.put("type4", "type4");
-        model.addAttribute("genreList", genre);
-        model.addAttribute("typeList", type);
+        model.addAttribute("genreList", genres);
+        model.addAttribute("typeList", types);
         return "index";
     }
 
     @RequestMapping(value = "/channels", method = RequestMethod.GET)
     public String listChannels(Model model) {
         model.addAttribute("channel", new Channel());
-        model.addAttribute("listChannels", this.channelService.listChannels());
+        model.addAttribute("listChannels", channelService.listChannels());
         return "channels";
     }
 
-    //For add and update person both
     @RequestMapping(value = "/channel/add", method = RequestMethod.POST)
     public String addChannel(@ModelAttribute("channel") Channel c) {
         this.channelService.addChannel(c);
@@ -75,8 +69,8 @@ public class ChannelController {
     @RequestMapping("/channel/{id}")
     @Transactional
     public String editChannel(@PathVariable("id") int id, Model model) {
-        Channel channel = this.channelService.getChannelById(id);
-        Map<String, String> type = new LinkedHashMap<>();
+        Channel channel = channelService.getChannelById(id);
+        Map<String, String> types = programService.listProgramTypes();
         List<List<Program>> programs = new ArrayList<>();
         for (int i = 1; i < 8; i++) {
             programs.add(channelService.listProgramsByDay(id, i));
@@ -84,11 +78,7 @@ public class ChannelController {
             Collections.sort(programs.get(programs.size() - 1));
         }
         Hibernate.initialize(programs);
-        type.put("type1", "type1");
-        type.put("type2", "type2");
-        type.put("type3", "type3");
-        type.put("type4", "type4");
-        model.addAttribute("typeList", type);
+        model.addAttribute("typeList", types);
         model.addAttribute("channel", channel);
         model.addAttribute("program", new Program());
         model.addAttribute("sundayList", programs.get(0));
@@ -103,8 +93,8 @@ public class ChannelController {
 
     @RequestMapping(value = "/program/add", method = RequestMethod.POST)
     @Transactional
-    public String addProgram(@ModelAttribute("program") Program program, @ModelAttribute("channel") int id, Model model) {
-        Channel channel = this.channelService.getChannelById(id);
+    public String addProgram(@ModelAttribute("program") Program program, @ModelAttribute("channel") int id) {
+        Channel channel = channelService.getChannelById(id);
         channel.addProgram(program);
         channelService.updateChannel(channel);
         this.programService.addProgram(program);
@@ -114,11 +104,11 @@ public class ChannelController {
     @RequestMapping("/program/remove/{id}")
     @Transactional
     public String removeProgram(@PathVariable("id") int programId) {
-        Program program = this.programService.getProgramById(programId);
+        Program program = programService.getProgramById(programId);
         Channel channel = program.getChannel();
         int channelId = channel.getChannelId();
         channel.removeProgram(program);
-        this.programService.removeProgram(programId);
+        programService.removeProgram(programId);
         return "redirect:/channel/" + channelId;
     }
 
@@ -127,33 +117,27 @@ public class ChannelController {
     public String editProgram(@PathVariable("id") int programId, Model model) {
         Program program = this.programService.getProgramById(programId);
         Channel channel = program.getChannel();
-        model.addAttribute("listChannels", this.channelService.listChannels());
         model.addAttribute("channel", channel);
         model.addAttribute("program", program);
-        Map<String, String> type = new LinkedHashMap<>();
-        type.put("type1", "type1");
-        type.put("type2", "type2");
-        type.put("type3", "type3");
-        type.put("type4", "type4");
-        Map<Channel, String> availableChannels = new LinkedHashMap<>();
-        this.channelService.listChannels().forEach(channel1 -> availableChannels.put(channel1, channel1.getChannelName()));
-        model.addAttribute("channelList", availableChannels);
-        model.addAttribute("typeList", type);
+        model.addAttribute("listChannels", channelService.listChannels());
+        model.addAttribute("typeList", programService.listProgramTypes());
+        model.addAttribute("channelList", channelService.getAvailableChannels());
         model.addAttribute("repeatingPrograms", programService.searchByName(program.getProgramName()));
         return "editprogram";
     }
 
     @RequestMapping(value = "/program/update/{id}", method = RequestMethod.POST)
     @Transactional
-    public String updateProgram(@PathVariable("id") int programId, @ModelAttribute("program") Program program, @RequestParam(value = "previousId") int previousChannelId, @RequestParam(value = "channels") int newId) {
-        System.out.println("previous id " + previousChannelId);
-        System.out.println("new id " + newId);
+    public String updateProgram(
+            @PathVariable("id") int programId, @ModelAttribute("program") Program program,
+            @RequestParam(value = "previousId") int previousChannelId, @RequestParam(value = "channels") int newId) {
         Channel newChannel = channelService.getChannelById(newId);
         program.setChannel(newChannel);
-        this.programService.updateProgram(program);
+        programService.updateProgram(program);
         return "redirect:/channel/" + previousChannelId;
     }
 
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/programs/search/bytype", method = RequestMethod.POST)
     @ResponseBody
     public String searchPrograms(@RequestParam String type, @RequestParam long startdate, @RequestParam long enddate) {
@@ -168,8 +152,6 @@ public class ChannelController {
             jsonObject.put("channelId", program.getChannel().getChannelId());
             jsonArray.add(jsonObject);
         }
-        JSONObject mainObj = new JSONObject();
-        mainObj.put("results", jsonArray);
         return jsonArray.toJSONString();
     }
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by raul on 22/01/17.
@@ -59,5 +60,10 @@ public class ProgramServiceImpl implements ProgramService {
     @Transactional
     public List<Program> searchByType(String type, long startDate, long endDate) {
         return programDAO.searchByType(type, startDate, endDate);
+    }
+
+    @Override
+    public Map<String, String> listProgramTypes() {
+        return programDAO.listProgramTypes();
     }
 }

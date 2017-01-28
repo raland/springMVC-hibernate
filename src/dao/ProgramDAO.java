@@ -3,20 +3,23 @@ package dao;
 import model.Program;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProgramDAO {
 
-    public void addProgram(Program p);
+    void addProgram(Program p);
 
-    public void updateProgram(Program p);
+    void updateProgram(Program p);
 
-    public List<Program> listPrograms();
+    List<Program> listPrograms();
 
-    public Program getProgramById(int id);
+    Program getProgramById(int id);
 
-    public void removeProgram(int id);
+    void removeProgram(int id);
 
-    public List<Program> searchByName(String name);
+    List<Program> searchByName(String name);
 
-    public List<Program> searchByType(String type, long startDate, long endDate);
+    List<Program> searchByType(String type, long startDate, long endDate);
+
+    Map<String, String> listProgramTypes();
 }

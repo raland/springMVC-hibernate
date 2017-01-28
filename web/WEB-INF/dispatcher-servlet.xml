@@ -26,10 +26,6 @@
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
 
-    <!--    <beans:bean name="/index.html" class="springcontroller.ChannelController">
-            <beans:property name="channelService" ref="channelService"/>
-        </beans:bean>-->
-
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <beans:property name="driverClassName" value="org.postgresql.Driver"/>
         <beans:property name="url" value="jdbc:postgresql://localhost:5432/testdb"/>
@@ -79,6 +75,5 @@
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>
-
 
 </beans:beans>

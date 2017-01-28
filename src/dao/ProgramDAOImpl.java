@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
@@ -33,11 +34,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     @Override
     public List<Program> listPrograms() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Program> programList = session.createQuery("from Program ").list();
-        for (Program p : programList) {
-            // TODO: 22/01/17 something
-        }
-        return programList;
+        return (List<Program>) session.createQuery("from Program ").list();
     }
 
     @Override
@@ -62,6 +59,16 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     @Override
     public List<Program> searchByType(String type, long startDate, long endDate) {
-        return this.listPrograms().stream().filter(program -> program.getStartTime().after(new Date(startDate)) && program.getStartTime().before(new Date(endDate)) && program.getProgramType().equals(type)).collect(Collectors.toList());
+        return this.listPrograms()
+                .stream()
+                .filter(program -> program.getStartTime().after(new Date(startDate))
+                        && program.getStartTime().before(new Date(endDate))
+                        && program.getProgramType().equals(type))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<String, String> listProgramTypes() {
+        return Program.getProgramTypes();
     }
 }

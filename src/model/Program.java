@@ -2,9 +2,7 @@ package model;
 
 
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by raul on 13/01/17.
@@ -12,6 +10,23 @@ import java.util.Date;
  */
 @Entity
 public class Program implements Comparator<Program>, Comparable<Program> {
+    private static final Map<String, String> programTypes;
+
+    static {
+        Map<String, String> types = new LinkedHashMap<>();
+        types.put("Sport", "Sport");
+        types.put("Sitcom", "Sitcom");
+        types.put("Documentary", "Documentary");
+        types.put("Cartoon", "Cartoon");
+        types.put("Drama", "Drama");
+        types.put("News", "News");
+        types.put("Talk Show", "Talk Show");
+        types.put("Music", "Music");
+        types.put("Lifestyle", "Lifestyle");
+        types.put("Other", "Other");
+        programTypes = Collections.unmodifiableMap(types);
+    }
+
     @Id
     @GeneratedValue
     private int programId;
@@ -26,12 +41,17 @@ public class Program implements Comparator<Program>, Comparable<Program> {
     private int programLength;
     private Long epochTime;
 
+
     public Program(String programName, int programLength) {
         this.programName = programName;
         this.programLength = programLength;
     }
 
     public Program() {
+    }
+
+    public static Map<String, String> getProgramTypes() {
+        return programTypes;
     }
 
     public Long getEpochTime() {
@@ -103,13 +123,6 @@ public class Program implements Comparator<Program>, Comparable<Program> {
     public void convertDate() {
         if (epochTime != null) {
             startTime = new Date(epochTime);
-        }
-    }
-
-    public void moveProgram(Channel previousChannel, Channel newChannel) {
-        if (!previousChannel.equals(newChannel)) {
-            previousChannel.removeProgram(this);
-            newChannel.addProgram(this);
         }
     }
 

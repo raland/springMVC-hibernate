@@ -1,10 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -13,6 +10,20 @@ import java.util.stream.Collectors;
  */
 @Entity
 public class Channel {
+    private static final Map<String, String> channelGenres;
+
+    static {
+        Map<String, String> genres = new LinkedHashMap<>();
+        genres.put("News", "News");
+        genres.put("Sport", "Sport");
+        genres.put("Generic", "Generic");
+        genres.put("Music", "Music");
+        genres.put("Science & History", "Science & History");
+        genres.put("Movies", "Movies");
+        genres.put("Other", "Other");
+        channelGenres = Collections.unmodifiableMap(genres);
+    }
+
     @Id
     @GeneratedValue
     private int channelId;
@@ -21,7 +32,6 @@ public class Channel {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "channel")
     @OrderBy("epochTime DESC")
     private List<Program> programs = new ArrayList<>();
-
     private String genre;
 
     public Channel(String channelName) {
@@ -29,6 +39,10 @@ public class Channel {
     }
 
     public Channel() {
+    }
+
+    public static Map<String, String> getChannelGenres() {
+        return channelGenres;
     }
 
     public Set<Program> filterByProgram(String programName) {

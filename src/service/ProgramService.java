@@ -3,6 +3,7 @@ package service;
 import model.Program;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProgramService {
 
@@ -19,5 +20,7 @@ public interface ProgramService {
     public List<Program> searchByName(String name);
 
     public List<Program> searchByType(String type, long startDate, long endDate);
+
+    Map<String, String> listProgramTypes();
 
 }

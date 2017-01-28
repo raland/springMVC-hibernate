@@ -4,22 +4,27 @@ import model.Channel;
 import model.Program;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by raul on 23/01/17.
  */
 public interface ChannelService {
-    public void addChannel(Channel c);
+    void addChannel(Channel c);
 
-    public void updateChannel(Channel c);
+    void updateChannel(Channel c);
 
-    public List<Channel> listChannels();
+    List<Channel> listChannels();
 
-    public Channel getChannelById(int id);
+    Channel getChannelById(int id);
 
-    public void removeChannel(int id);
+    void removeChannel(int id);
 
     List<Program> listChannelPrograms(int id);
 
     List<Program> listProgramsByDay(int id, int day);
+
+    Map<String, String> listChannelGenres();
+
+    Map<Channel, String> getAvailableChannels();
 }

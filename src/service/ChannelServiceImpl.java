@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ChannelServiceImpl implements ChannelService {
@@ -57,5 +58,16 @@ public class ChannelServiceImpl implements ChannelService {
     @Transactional
     public List<Program> listProgramsByDay(int id, int day) {
         return channelDAO.listProgramsByDay(id, day);
+    }
+
+    @Override
+    public Map<String, String> listChannelGenres() {
+        return channelDAO.listGenres();
+    }
+
+    @Override
+    @Transactional
+    public Map<Channel, String> getAvailableChannels() {
+        return channelDAO.getAvailableChannels();
     }
 }

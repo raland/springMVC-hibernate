@@ -4,10 +4,11 @@ import model.Channel;
 import model.Program;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChannelDAOImpl implements ChannelDAO {
     private SessionFactory sessionFactory;
@@ -55,13 +56,26 @@ public class ChannelDAOImpl implements ChannelDAO {
     }
 
     @Override
-    @Transactional
     public List<Program> listChannelPrograms(int id) {
         return getChannelById(id).getPrograms();
     }
 
     @Override
     public List<Program> listProgramsByDay(int id, int day) {
-        return new ArrayList<Program>(getChannelById(id).filterByDay(day));
+        return new ArrayList<>(getChannelById(id).filterByDay(day));
     }
+
+    @Override
+    public Map<String, String> listGenres() {
+        return Channel.getChannelGenres();
+    }
+
+    @Override
+    public Map<Channel, String> getAvailableChannels() {
+        Map<Channel, String> availableChannels = new LinkedHashMap<>();
+        this.listChannels().forEach(channel1 -> availableChannels.put(channel1, channel1.getChannelName()));
+        return availableChannels;
+    }
+
+
 }
