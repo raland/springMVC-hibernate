@@ -138,9 +138,8 @@ public class ChannelController {
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/programs/search/bytype", method = RequestMethod.POST)
-    @ResponseBody
-    public String searchPrograms(@RequestParam String type, @RequestParam long startdate, @RequestParam long enddate) {
+    @RequestMapping(value = "/programs/search/bytype/", method = RequestMethod.POST)
+    public @ResponseBody String searchPrograms(@RequestParam String type, @RequestParam long startdate, @RequestParam long enddate) {
         List<Program> results = programService.searchByType(type, startdate, enddate);
         Collections.sort(results);
         JSONArray jsonArray = new JSONArray();

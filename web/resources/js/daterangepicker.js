@@ -94,7 +94,7 @@ $(document).ready(function () {
     $("#searchButton").click(function (e) {
         $.ajax({
             type: "POST",
-            url: "/programs/search/bytype",
+            url: "/programs/search/bytype/",
             data: {
                 "type": $("#genreSelect").val(),
                 "startdate": Date.parse(startDate),
