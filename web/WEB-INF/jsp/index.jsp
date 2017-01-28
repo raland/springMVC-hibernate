@@ -45,7 +45,7 @@
             <a href="${pageContext.request.contextPath}/channels"><button class="btn-lg btn-primary">View Channels</button></a>
             <div style="margin-top: 2%" class="form-group">
                 <select id="genreSelect" class="form-control">
-                    <c:forEach items="${genreList}" var="genre">
+                    <c:forEach items="${typeList}" var="genre">
                         <option value="${genre.key}">${genre.key}</option>
                     </c:forEach>
                 </select>

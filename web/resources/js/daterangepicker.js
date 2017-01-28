@@ -3,6 +3,9 @@
  */
 $(document).ready(function () {
 
+    var startDate;
+    var endDate;
+
 
     $('input[name="startTime"]').daterangepicker({
         "singleDatePicker": true,
@@ -63,7 +66,26 @@ $(document).ready(function () {
         "startDate": "01/21/2017",
         "endDate": "01/27/2017"
     }, function(start, end, label) {
-        console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        startDate = start;
+        endDate = end;
+    });
+
+    $("#searchButton").click(function(e){
+        $.ajax({
+            type: "POST",
+            url: "/programs/search/bytype",
+            data: {
+                "type": $("#genreSelect").val(),
+                "startdate": Date.parse(startDate),
+                "enddate": Date.parse(endDate)
+            },
+            success: function (data) {
+                $('#searchResults').html("");
+/*                $.each(JSON.parse(data), function (i, val) {
+                    $('#searchResults').prepend(createSearchResult2(i, val));
+                });*/
+            }
+        })
     });
 
 });

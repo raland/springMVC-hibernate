@@ -18,4 +18,6 @@ public interface ProgramService {
 
     public List<Program> searchByName(String name);
 
+    public List<Program> searchByType(String type, long startDate, long endDate);
+
 }

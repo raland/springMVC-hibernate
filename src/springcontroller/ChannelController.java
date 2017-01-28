@@ -15,6 +15,7 @@ import service.ChannelService;
 import service.ProgramService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ChannelController {
@@ -38,11 +39,17 @@ public class ChannelController {
     public String indexPage(Model model) {
         model.addAttribute("channel", new Channel());
         Map<String, String> genre = new LinkedHashMap<>();
+        Map<String, String> type = new LinkedHashMap<>();
         genre.put("genre1", "genre1");
         genre.put("genre2", "genre2");
         genre.put("genre3", "genre3");
         genre.put("genre4", "genre4");
+        type.put("type1", "type1");
+        type.put("type2", "type2");
+        type.put("type3", "type3");
+        type.put("type4", "type4");
         model.addAttribute("genreList", genre);
+        model.addAttribute("typeList", type);
         return "index";
     }
 
@@ -147,14 +154,15 @@ public class ChannelController {
         return "redirect:/channel/" + previousChannelId;
     }
 
-    @RequestMapping(value = "/programs/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/programs/search/bytype", method = RequestMethod.POST)
     @ResponseBody
-    public String searchPrograms(@RequestParam String query) {
+    public String searchPrograms(@RequestParam String type, @RequestParam long startdate, @RequestParam long enddate) {
         System.err.println("activating");
-        List<Program> results = programService.searchByName(query); //programService.listPrograms().stream().filter(program -> program.getProgramName().toLowerCase().equals(query.toLowerCase())).collect(Collectors.toList());
+        System.out.println(type + " " + startdate + " - " + enddate);
+        List<Program> results = programService.searchByType(type, startdate, enddate);
         System.out.println(results.size());
         //Collections.sort(results);
-        JSONArray jsonArray = new JSONArray();
+        /*JSONArray jsonArray = new JSONArray();
         for (Program program : results) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("programName", program.getProgramName());
@@ -167,7 +175,8 @@ public class ChannelController {
 
         JSONObject mainObj = new JSONObject();
         mainObj.put("results", jsonArray);
-        return mainObj.toJSONString();
+        return mainObj.toJSONString();*/
+return "hello";
     }
 
 }

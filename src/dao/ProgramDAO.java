@@ -17,4 +17,6 @@ public interface ProgramDAO {
     public void removeProgram(int id);
 
     public List<Program> searchByName(String name);
+
+    public List<Program> searchByType(String type, long startDate, long endDate);
 }

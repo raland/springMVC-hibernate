@@ -2,7 +2,13 @@
  * Created by raul on 27/01/17.
  */
 $(document).ready(function () {
-    $("#searchButton").click(function (e) {
+
+
+
+
+
+
+    /*$("#searchButton").click(function (e) {
         alert($("#dateInput").val());
         alert($("#genreSelect").val());
         var query = $("#searchInput").val();
@@ -21,5 +27,5 @@ $(document).ready(function () {
                 }
             })
         }
-    });
+    });*/
 });

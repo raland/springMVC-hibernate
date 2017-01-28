@@ -55,6 +55,7 @@
     <orderEntry type="library" name="moment" level="application" />
     <orderEntry type="library" name="daterangepicker" level="application" />
     <orderEntry type="library" name="jquery-3.1.1" level="application" />
-    <orderEntry type="library" name="com.googlecode.json-simple:json-simple:1.1.1" level="project" />
+    <orderEntry type="library" name="com.googlecode.json-simple:json-simple:Latest" level="project" />
+    <orderEntry type="library" name="jquery-3.1.1" level="application" />
   </component>
 </module>

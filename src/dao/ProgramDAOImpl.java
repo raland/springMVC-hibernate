@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProgramDAOImpl implements ProgramDAO {
@@ -62,5 +64,10 @@ public class ProgramDAOImpl implements ProgramDAO {
         CriteriaQuery<Program> criteria = builder.createQuery(Program.class);
         criteria.from(Program.class);
         return null;
+    }
+
+    @Override
+    public List<Program> searchByType(String type, long startDate, long endDate) {
+        return this.listPrograms().stream().filter(program -> program.getStartTime().after(new Date(startDate)) && program.getStartTime().before(new Date(endDate)) && program.getProgramType().equals(type)).collect(Collectors.toList());
     }
 }
